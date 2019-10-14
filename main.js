@@ -198,7 +198,7 @@ console.log(Bob.getFullName());
 
 //creating classes
 //easier to read syntax; added in ES6
-class Person {
+class personExample {
   constructor(firstName, lastName, dob) {
     this.firstName = firstName;
     this.lastName = lastName;
@@ -207,5 +207,71 @@ class Person {
 
   sayHi() {
     return `${this.firstName} says hello!`;
+  }
+}
+
+//DOM Manipulation
+
+console.log(window);
+
+//Single element selectors
+console.log(document.querySelector(".container"));
+//const form = document.getElementById("my-form");
+
+//Multiple element selectors
+//console.log(document.querySelectorAll(".item"));
+//const items = document.querySelectorAll(".item");
+
+//items.forEach(item => console.log(item));
+
+const ul = document.querySelector(".items");
+//ul.remove();
+//ul.lastElementChild.remove();
+//ul.firstElementChild.textContent = "Hello";
+//ul.children[1].innerText = "Daniel";
+//ul.lastElementChild.innerHTML = "<h1>Test</h1>";
+
+const btn = document.querySelector(".btn");
+//btn.style.background = "red";
+
+//Events
+/*
+btn.addEventListener("click", e => {
+  e.preventDefault();
+  console.log(e);
+  document.querySelector("#my-form").style.background = "#ccc";
+  document.querySelector("body").classList.add("bg-dark");
+  document.querySelector(".items").lastElementChild.innerHTML = "<h1>Hi</h1>";
+});
+*/
+
+const myForm = document.querySelector("#my-form");
+const nameInput = document.querySelector("#name");
+const emailInput = document.querySelector("#email");
+const msg = document.querySelector(".msg");
+const userList = document.querySelector("#users");
+//console.log(msg);
+myForm.addEventListener("submit", onSubmit);
+
+function onSubmit(e) {
+  e.preventDefault();
+
+  if (nameInput.value === "" || emailInput.value == "") {
+    //alert("Please enter the fields");
+    msg.classList.add("error");
+    msg.innerHTML = "Please enter fields";
+
+    setTimeout(() => msg.remove(), 3000);
+  } else {
+    const li = document.createElement("li");
+    li.appendChild(
+      document.createTextNode(`${nameInput.value} : ${emailInput.value}`)
+    );
+
+    userList.appendChild(li);
+
+    //clear fields
+    nameInput.value = "";
+    emailInput.value = "";
   }
 }
